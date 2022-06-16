@@ -1,6 +1,6 @@
 package com.example.dentalOffice.model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Patient {
 
@@ -9,16 +9,18 @@ public class Patient {
     private String name;
     private String lastname;
     private String address;
-    private LocalDate discahargeDate;
+    private Date dischargeDate;
 
     public Patient() {
     }
 
-    public Patient(String dni, String name, String lastname, LocalDate discahargeDate) {
+    public Patient(Long id, String dni, String name, String lastname, String address, Date dischargeDate) {
+        this.id = id;
         this.dni = dni;
         this.name = name;
         this.lastname = lastname;
-        this.discahargeDate = discahargeDate;
+        this.address = address;
+        this.dischargeDate = dischargeDate;
     }
 
     public String getAddress() {
@@ -61,11 +63,11 @@ public class Patient {
         this.lastname = lastname;
     }
 
-    public LocalDate getDiscahargeDate() {
-        return discahargeDate;
+    public Date getDischargeDate() {
+        return dischargeDate;
     }
 
-    public void setDiscahargeDate(LocalDate discahargeDate) {
-        this.discahargeDate = discahargeDate;
+    public void setDischargeDate(Date dischargeDate) {
+        this.dischargeDate = dischargeDate;
     }
 }
