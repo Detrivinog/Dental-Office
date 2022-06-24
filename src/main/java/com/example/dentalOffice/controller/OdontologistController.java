@@ -1,18 +1,19 @@
-package com.example.dentalOffice.controllers;
+package com.example.dentalOffice.controller;
 
-import com.example.dentalOffice.dao.Impl.OdontologistDaoH2;
-import com.example.dentalOffice.model.Odontologist;
-import com.example.dentalOffice.services.OdontologistService;
+import com.example.dentalOffice.entity.Odontologist;
+import com.example.dentalOffice.service.OdontologistServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/odontologist")
 public class OdontologistController {
 
-    private OdontologistService odontologistService = new OdontologistService(new OdontologistDaoH2);
+    @Autowired
+    private OdontologistServiceImpl odontologistService;
 
     @GetMapping("/")
     public List<Odontologist> getAll(){
@@ -20,7 +21,7 @@ public class OdontologistController {
     }
 
     @GetMapping("/{id}")
-    public Odontologist getById(@PathVariable Long id){
+    public Optional<Odontologist> getById(@PathVariable Long id){
         return odontologistService.getById(id);
     }
 

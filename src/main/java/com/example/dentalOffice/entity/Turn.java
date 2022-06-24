@@ -1,4 +1,4 @@
-package com.example.dentalOffice.model;
+package com.example.dentalOffice.entity;
 
 import java.time.LocalDate;
 

@@ -1,19 +1,21 @@
-package com.example.dentalOffice.controllers;
+package com.example.dentalOffice.controller;
 
-import com.example.dentalOffice.dao.Impl.PatientDaoH2;
-import com.example.dentalOffice.model.Patient;
-import com.example.dentalOffice.services.PatientService;
+import com.example.dentalOffice.entity.Patient;
+import com.example.dentalOffice.service.PatientServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/patients")
 public class PatientController {
 
-    PatientService patientService = new PatientService(new PatientDaoH2());
+    @Autowired
+    private PatientServiceImpl patientService;
 
     @GetMapping("/")
     public ResponseEntity<List<Patient>> getAll(){
@@ -21,14 +23,14 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Patient> getById(@PathVariable Long id){
+    public ResponseEntity<Optional<Patient>> getById(@PathVariable Long id){
         return ResponseEntity.ok(patientService.getById(id));
     }
 
     @PutMapping("/")
     public ResponseEntity<Patient> update(@RequestBody Patient patient){
         ResponseEntity<Patient> response = null;
-        if (patient.getId() != null && patientService.getById(patient.getId()) != null){
+        if (patient.getId() != null && patientService.getById(patient.getId()).isPresent()){
             response = ResponseEntity.ok(patientService.updatePatient(patient));
         } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
