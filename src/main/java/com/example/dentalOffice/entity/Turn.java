@@ -1,5 +1,6 @@
 package com.example.dentalOffice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,15 +14,15 @@ public class Turn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "turn_id")
     private Long id;
     private LocalDate date;
 
-    @OneToMany
-    @JoinColumn(name = "odontologist_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Odontologist odontologist;
 
-    @OneToMany
-    @JoinColumn(name = "patient_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Patient patient;
 
     public Turn() {

@@ -9,23 +9,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class OdontologistServiceImpl implements OdontologistService{
+public class OdontologistServiceImpl implements IOdontologistService {
 
     @Autowired
     private IOdontologistRepository odontologistRepository;
 
     @Override
-    public Optional<Odontologist> getById(Long id) {
+    public Optional<Odontologist> getOdontologistById(Long id) {
         return odontologistRepository.findById(id);
     }
 
     @Override
-    public List<Odontologist> getAll() {
+    public List<Odontologist> getAllOdontologist() {
         return odontologistRepository.findAll();
     }
 
     @Override
-    public Odontologist setOdontologist(Odontologist odontologist) {
+    public Odontologist saveOdontologist(Odontologist odontologist) {
         return odontologistRepository.save(odontologist);
     }
 
@@ -35,7 +35,7 @@ public class OdontologistServiceImpl implements OdontologistService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void deleteOdontologist(Long id) {
         odontologistRepository.deleteById(id);
     }
 }

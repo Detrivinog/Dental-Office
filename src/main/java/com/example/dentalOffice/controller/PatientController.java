@@ -17,20 +17,20 @@ public class PatientController {
     @Autowired
     private PatientServiceImpl patientService;
 
-    @GetMapping("/")
-    public ResponseEntity<List<Patient>> getAll(){
-        return ResponseEntity.ok(patientService.getAll());
+    @GetMapping("/list")
+    public ResponseEntity<List<Patient>> getAllPatient(){
+        return ResponseEntity.ok(patientService.getAllPatient());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Patient>> getById(@PathVariable Long id){
-        return ResponseEntity.ok(patientService.getById(id));
+    public ResponseEntity<Optional<Patient>> getPatientById(@PathVariable Long id){
+        return ResponseEntity.ok(patientService.getPatientById(id));
     }
 
     @PutMapping("/")
-    public ResponseEntity<Patient> update(@RequestBody Patient patient){
+    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient){
         ResponseEntity<Patient> response = null;
-        if (patient.getId() != null && patientService.getById(patient.getId()).isPresent()){
+        if (patient.getId() != null && patientService.getPatientById(patient.getId()).isPresent()){
             response = ResponseEntity.ok(patientService.updatePatient(patient));
         } else {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -39,14 +39,14 @@ public class PatientController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
-        patientService.delete(id);
+    public ResponseEntity<?> deletePatient(@PathVariable Long id){
+        patientService.deletePatient(id);
         return ResponseEntity.ok("Patient deleted");
     }
 
     @PostMapping("/")
-    public ResponseEntity<Patient> setPatient(@RequestBody Patient patient){
-        return ResponseEntity.ok(patientService.setPatient(patient));
+    public ResponseEntity<Patient> savePatient(@RequestBody Patient patient){
+        return ResponseEntity.ok(patientService.savePatient(patient));
     }
 
 }

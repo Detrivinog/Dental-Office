@@ -10,23 +10,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class PatientServiceImpl implements PatientService{
+public class PatientServiceImpl implements IPatientService {
 
     @Autowired
     private IPatientRepository patientRepository;
 
     @Override
-    public Optional<Patient> getById(Long id) {
+    public Optional<Patient> getPatientById(Long id) {
         return patientRepository.findById(id);
     }
 
     @Override
-    public List<Patient> getAll() {
+    public List<Patient> getAllPatient() {
         return patientRepository.findAll();
     }
 
     @Override
-    public Patient setPatient(Patient patient) {
+    public Patient savePatient(Patient patient) {
         return patientRepository.save(patient);
     }
 
@@ -36,7 +36,7 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public void delete(Long id) {
+    public void deletePatient(Long id) {
         patientRepository.deleteById(id);
     }
 }

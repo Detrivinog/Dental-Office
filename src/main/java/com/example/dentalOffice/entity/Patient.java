@@ -16,6 +16,7 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "patient_id")
     private Long id;
     private String dni;
     private String name;
@@ -23,7 +24,8 @@ public class Patient {
     private String address;
     private Date dischargeDate;
 
-    @ManyToOne
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "turn_id")
     @JsonIgnore
     private List<Turn> turns;
 

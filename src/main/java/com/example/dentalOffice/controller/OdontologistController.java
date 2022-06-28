@@ -15,29 +15,29 @@ public class OdontologistController {
     @Autowired
     private OdontologistServiceImpl odontologistService;
 
-    @GetMapping("/")
-    public List<Odontologist> getAll(){
-        return odontologistService.getAll();
+    @GetMapping("/list")
+    public List<Odontologist> getAllOdontologist(){
+        return odontologistService.getAllOdontologist();
     }
 
     @GetMapping("/{id}")
-    public Optional<Odontologist> getById(@PathVariable Long id){
-        return odontologistService.getById(id);
+    public Optional<Odontologist> getOdontologistById(@PathVariable Long id){
+        return odontologistService.getOdontologistById(id);
     }
 
     @PutMapping("/")
-    public Odontologist update(@RequestBody Odontologist o){
+    public Odontologist updateOdontologist(@RequestBody Odontologist o){
         return odontologistService.updateOdontologist(o);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
-        odontologistService.delete(id);
+    public void deleteOdontologist(@PathVariable Long id){
+        odontologistService.deleteOdontologist(id);
     }
 
     @PostMapping("/")
-    public Odontologist setOdontologist(@RequestBody Odontologist o){
-        return odontologistService.setOdontologist(o);
+    public Odontologist saveOdontologist(@RequestBody Odontologist o){
+        return odontologistService.saveOdontologist(o);
     }
 
 }

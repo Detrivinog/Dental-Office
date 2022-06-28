@@ -16,12 +16,14 @@ public class Odontologist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "odontologist_id")
     private Long id;
     private String license;
     private String name;
     private String lastname;
 
-    @ManyToOne
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "turn_id")
     @JsonIgnore
     private List<Turn> turns;
 
