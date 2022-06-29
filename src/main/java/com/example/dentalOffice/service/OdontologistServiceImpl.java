@@ -1,6 +1,7 @@
 package com.example.dentalOffice.service;
 
 import com.example.dentalOffice.entity.Odontologist;
+import com.example.dentalOffice.entity.OdontologistDto;
 import com.example.dentalOffice.repository.IOdontologistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,22 +16,27 @@ public class OdontologistServiceImpl implements IOdontologistService {
     private IOdontologistRepository odontologistRepository;
 
     @Override
-    public Optional<Odontologist> getOdontologistById(Long id) {
+    public void createOdontologist(OdontologistDto odontologist) {
+        saveOdontologist(odontologist);
+    }
+
+    @Override
+    public Optional<OdontologistDto> getOdontologistById(Long id) {
         return odontologistRepository.findById(id);
     }
 
     @Override
-    public List<Odontologist> getAllOdontologist() {
+    public List<OdontologistDto> getAllOdontologist() {
         return odontologistRepository.findAll();
     }
 
     @Override
-    public Odontologist saveOdontologist(Odontologist odontologist) {
+    public Odontologist saveOdontologist(OdontologistDto odontologist) {
         return odontologistRepository.save(odontologist);
     }
 
     @Override
-    public Odontologist updateOdontologist(Odontologist odontologist) {
+    public Odontologist updateOdontologist(OdontologistDto odontologist) {
         return odontologistRepository.save(odontologist);
     }
 
