@@ -1,6 +1,7 @@
 package com.example.dentalOffice.controller;
 
 import com.example.dentalOffice.entity.Patient;
+import com.example.dentalOffice.entity.PatientDto;
 import com.example.dentalOffice.service.PatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,24 +19,19 @@ public class PatientController {
     private PatientServiceImpl patientService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<Patient>> getAllPatient(){
+    public ResponseEntity<List<PatientDto>> getAllPatient(){
         return ResponseEntity.ok(patientService.getAllPatient());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Patient>> getPatientById(@PathVariable Long id){
-        return ResponseEntity.ok(patientService.getPatientById(id));
+    public PatientDto getPatientById(@PathVariable Long id) throws Exception{
+        return patientService.getPatientById(id);
     }
 
     @PutMapping("/")
-    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient){
-        ResponseEntity<Patient> response = null;
-        if (patient.getId() != null && patientService.getPatientById(patient.getId()).isPresent()){
-            response = ResponseEntity.ok(patientService.updatePatient(patient));
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;
+    public ResponseEntity<?> updatePatient(@RequestBody PatientDto patient){
+        patientService.updatePatient(patient);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -45,8 +41,9 @@ public class PatientController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Patient> savePatient(@RequestBody Patient patient){
-        return ResponseEntity.ok(patientService.savePatient(patient));
+    public ResponseEntity<?> savePatient(@RequestBody PatientDto patient){
+        patientService.savePatient(patient);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
 }

@@ -1,16 +1,15 @@
 package com.example.dentalOffice.service;
 
-import com.example.dentalOffice.entity.Patient;
+import com.example.dentalOffice.entity.PatientDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IPatientService {
 
-    Optional<Patient> getPatientById(Long id);
-    List<Patient> getAllPatient();
-    Patient savePatient(Patient patient);
-    Patient updatePatient(Patient patient);
+    PatientDto getPatientById(Long id) throws Exception;
+    List<PatientDto> getAllPatient();
+    void savePatient(PatientDto patient);
+    void updatePatient(PatientDto patient);
     void deletePatient(Long id);
 
 }

@@ -3,9 +3,11 @@ package com.example.dentalOffice.service;
 import com.example.dentalOffice.entity.Odontologist;
 import com.example.dentalOffice.entity.OdontologistDto;
 import com.example.dentalOffice.repository.IOdontologistRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,29 +17,41 @@ public class OdontologistServiceImpl implements IOdontologistService {
     @Autowired
     private IOdontologistRepository odontologistRepository;
 
-    @Override
-    public void createOdontologist(OdontologistDto odontologist) {
-        saveOdontologist(odontologist);
+    @Autowired
+    ObjectMapper mapper;
+
+    private void createOdontologist(OdontologistDto odontologist){
+        Odontologist newOdontologist = mapper.convertValue(odontologist, Odontologist.class);
+        odontologistRepository.save(newOdontologist);
     }
 
     @Override
-    public Optional<OdontologistDto> getOdontologistById(Long id) {
-        return odontologistRepository.findById(id);
+    public OdontologistDto getOdontologistById(Long id) throws Exception {
+        Optional<Odontologist> found = odontologistRepository.findById(id);
+        if(found.isPresent())
+            return mapper.convertValue(found, OdontologistDto.class);
+        else
+            throw new Exception("Odontologist Not Exist");
     }
 
     @Override
     public List<OdontologistDto> getAllOdontologist() {
-        return odontologistRepository.findAll();
+        List<Odontologist> allOdontologist = odontologistRepository.findAll();
+        List<OdontologistDto> allOdontologistDto = new ArrayList<OdontologistDto>();
+        for (Odontologist odontologist: allOdontologist)
+            allOdontologistDto.add(mapper.convertValue(odontologist, OdontologistDto.class));
+
+        return allOdontologistDto;
     }
 
     @Override
-    public Odontologist saveOdontologist(OdontologistDto odontologist) {
-        return odontologistRepository.save(odontologist);
+    public void saveOdontologist(OdontologistDto odontologist) {
+        createOdontologist(odontologist);
     }
 
     @Override
-    public Odontologist updateOdontologist(OdontologistDto odontologist) {
-        return odontologistRepository.save(odontologist);
+    public void updateOdontologist(OdontologistDto odontologist) {
+        createOdontologist(odontologist);
     }
 
     @Override

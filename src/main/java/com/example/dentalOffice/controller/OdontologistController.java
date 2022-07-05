@@ -1,12 +1,11 @@
 package com.example.dentalOffice.controller;
 
-import com.example.dentalOffice.entity.Odontologist;
+import com.example.dentalOffice.entity.OdontologistDto;
 import com.example.dentalOffice.service.OdontologistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/odontologist")
@@ -16,18 +15,18 @@ public class OdontologistController {
     private OdontologistServiceImpl odontologistService;
 
     @GetMapping("/list")
-    public List<Odontologist> getAllOdontologist(){
+    public List<OdontologistDto> getAllOdontologist(){
         return odontologistService.getAllOdontologist();
     }
 
     @GetMapping("/{id}")
-    public Optional<Odontologist> getOdontologistById(@PathVariable Long id){
+    public OdontologistDto getOdontologistById(@PathVariable Long id) throws Exception {
         return odontologistService.getOdontologistById(id);
     }
 
     @PutMapping("/")
-    public Odontologist updateOdontologist(@RequestBody Odontologist o){
-        return odontologistService.updateOdontologist(o);
+    public void updateOdontologist(@RequestBody OdontologistDto o){
+        odontologistService.updateOdontologist(o);
     }
 
     @DeleteMapping("/{id}")
@@ -36,8 +35,8 @@ public class OdontologistController {
     }
 
     @PostMapping("/")
-    public Odontologist saveOdontologist(@RequestBody Odontologist o){
-        return odontologistService.saveOdontologist(o);
+    public void saveOdontologist(@RequestBody OdontologistDto o){
+        odontologistService.saveOdontologist(o);
     }
 
 }
