@@ -2,14 +2,14 @@ package com.example.dentalOffice.service;
 
 
 import com.example.dentalOffice.entity.Turn;
+import com.example.dentalOffice.entity.TurnDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ITurnService {
-    Optional<Turn> getTurnById(Long id);
-    List<Turn> getAllTurn();
-    Turn saveTurn(Turn turn);
-    Turn updateTurn(Turn turn);
+    TurnDto getTurnById(Long id) throws Exception;
+    List<TurnDto> getAllTurn();
+    void saveTurn(TurnDto turn);
+    void updateTurn(TurnDto turn);
     void deleteTurn(Long id);
 }
