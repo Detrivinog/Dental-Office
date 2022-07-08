@@ -6,7 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="patients")
@@ -15,7 +15,7 @@ import java.util.List;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "patient_id")
     private Long id;
     private String dni;
@@ -24,10 +24,9 @@ public class Patient {
     private String address;
     private Date dischargeDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "turn_id")
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Turn> turns;
+    private Set<Turn> turns;
 
     public Patient() {
     }

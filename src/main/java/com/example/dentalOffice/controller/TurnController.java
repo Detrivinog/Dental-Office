@@ -1,6 +1,5 @@
 package com.example.dentalOffice.controller;
 
-import com.example.dentalOffice.entity.PatientDto;
 import com.example.dentalOffice.entity.Turn;
 import com.example.dentalOffice.entity.TurnDto;
 import com.example.dentalOffice.service.TurnServiceImpl;
@@ -16,7 +15,8 @@ import java.util.List;
 public class TurnController {
 
     @Autowired
-    private TurnServiceImpl turnService;
+    TurnServiceImpl turnService;
+
 
     @GetMapping("/list")
     public ResponseEntity<List<TurnDto>> getAllTurn(){
@@ -41,7 +41,7 @@ public class TurnController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> saveTurn(@RequestBody TurnDto turn){
+    public ResponseEntity<?> saveTurn(@RequestBody Turn turn){
         turnService.saveTurn(turn);
         return ResponseEntity.ok(HttpStatus.OK);
     }

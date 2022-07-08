@@ -5,11 +5,13 @@ import com.example.dentalOffice.entity.TurnDto;
 import com.example.dentalOffice.repository.ITurnRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TurnServiceImpl implements ITurnService{
 
     @Autowired
@@ -43,8 +45,8 @@ public class TurnServiceImpl implements ITurnService{
     }
 
     @Override
-    public void saveTurn(TurnDto turn) {
-        createTurn(turn);
+    public void saveTurn(Turn turn) {
+        turnRepository.save(turn);
     }
 
     @Override
