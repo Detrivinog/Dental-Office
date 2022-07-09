@@ -2,6 +2,8 @@ package com.example.dentalOffice.controller;
 
 import com.example.dentalOffice.entity.Turn;
 import com.example.dentalOffice.entity.dto.TurnDto;
+import com.example.dentalOffice.exceptions.BadRequestException;
+import com.example.dentalOffice.exceptions.ResourceNotFoundException;
 import com.example.dentalOffice.service.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,24 +25,24 @@ public class TurnController {
     }
 
     @GetMapping("/{id}")
-    public TurnDto getTurById(@PathVariable Long id) throws Exception{
+    public TurnDto getTurById(@PathVariable Long id) throws ResourceNotFoundException {
         return turnService.getTurnById(id);
     }
 
     @PutMapping("/")
-    public ResponseEntity<?> updateTurn(@RequestBody TurnDto turn){
+    public ResponseEntity<?> updateTurn(@RequestBody TurnDto turn) throws ResourceNotFoundException {
         turnService.updateTurn(turn);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteTurn(@PathVariable Long id){
+    public ResponseEntity<?> deleteTurn(@PathVariable Long id) throws ResourceNotFoundException {
         turnService.deleteTurn(id);
         return ResponseEntity.ok("Turn deleted");
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> saveTurn(@RequestBody Turn turn){
+    public ResponseEntity<?> saveTurn(@RequestBody Turn turn) throws BadRequestException, ResourceNotFoundException {
         turnService.saveTurn(turn);
         return ResponseEntity.ok(HttpStatus.OK);
     }

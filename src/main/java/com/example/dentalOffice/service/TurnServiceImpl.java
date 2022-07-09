@@ -1,7 +1,13 @@
 package com.example.dentalOffice.service;
 
+import com.example.dentalOffice.entity.Odontologist;
+import com.example.dentalOffice.entity.Patient;
 import com.example.dentalOffice.entity.Turn;
+import com.example.dentalOffice.entity.dto.OdontologistDto;
+import com.example.dentalOffice.entity.dto.PatientDto;
 import com.example.dentalOffice.entity.dto.TurnDto;
+import com.example.dentalOffice.exceptions.BadRequestException;
+import com.example.dentalOffice.exceptions.ResourceNotFoundException;
 import com.example.dentalOffice.repository.ITurnRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,12 @@ public class TurnServiceImpl implements ITurnService{
     private ITurnRepository turnRepository;
 
     @Autowired
+    private OdontologistServiceImpl odontologistService;
+
+    @Autowired
+    private PatientServiceImpl patientService;
+
+    @Autowired
     ObjectMapper mapper;
 
     private void createTurn(TurnDto turn){
@@ -24,12 +36,12 @@ public class TurnServiceImpl implements ITurnService{
     }
 
     @Override
-    public TurnDto getTurnById(Long id) throws Exception {
+    public TurnDto getTurnById(Long id) throws ResourceNotFoundException {
         Optional<Turn> found = turnRepository.findById(id);
         if (found.isPresent())
             return mapper.convertValue(found, TurnDto.class);
         else
-            throw new Exception("Turn Not Exist");
+            throw new ResourceNotFoundException("Turn Not Exist with id: "+id);
     }
 
     @Override
@@ -43,19 +55,32 @@ public class TurnServiceImpl implements ITurnService{
     }
 
     @Override
-    public void saveTurn(Turn turn) {
-        turnRepository.save(turn);
+    public void saveTurn(Turn turn) throws BadRequestException, ResourceNotFoundException {
+        Optional<OdontologistDto> odontologist = Optional.ofNullable(odontologistService.getOdontologistById(turn.getOdontologist().getId()));
+        Optional<PatientDto> patient =  Optional.ofNullable(patientService.getPatientById(turn.getPatient().getId()));
+        if (odontologist.isPresent() && patient.isPresent())
+            turnRepository.save(turn);
+        else
+            throw new BadRequestException("Odontologist Not Exist with id: "+ turn.getOdontologist().getId()+"or Patient Not Exist with id: "+ turn.getPatient().getId());
     }
 
     @Override
-    public void updateTurn(TurnDto turn) {
-        createTurn(turn);
+    public void updateTurn(TurnDto turn) throws ResourceNotFoundException{
+        Optional<Turn> found = turnRepository.findById(turn.getId());
+        if (found.isPresent())
+            createTurn(turn);
+        else
+            throw new ResourceNotFoundException("Turn Not Exist with id: "+turn.getId());
 
     }
 
     @Override
-    public void deleteTurn(Long id) {
-        turnRepository.deleteById(id);
+    public void deleteTurn(Long id) throws ResourceNotFoundException {
+        Optional<Turn> found = turnRepository.findById(id);
+        if (found.isPresent())
+            turnRepository.deleteById(id);
+        else
+            throw new ResourceNotFoundException("Turn Not Exist with id: "+id);
     }
 
 //    @Override

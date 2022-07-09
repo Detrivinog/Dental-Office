@@ -1,7 +1,9 @@
 package com.example.dentalOffice.service;
 
+import com.example.dentalOffice.entity.Odontologist;
 import com.example.dentalOffice.entity.Patient;
 import com.example.dentalOffice.entity.dto.PatientDto;
+import com.example.dentalOffice.exceptions.ResourceNotFoundException;
 import com.example.dentalOffice.repository.IPatientRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +26,12 @@ public class PatientServiceImpl implements IPatientService {
     }
 
     @Override
-    public PatientDto getPatientById(Long id) throws Exception {
+    public PatientDto getPatientById(Long id) throws ResourceNotFoundException {
         Optional<Patient> found = patientRepository.findById(id);
         if (found.isPresent())
             return mapper.convertValue(found, PatientDto.class);
         else
-            throw new Exception("Patient Not Exist");
+            throw new ResourceNotFoundException("Patient Not Exist with id: "+id);
     }
 
     @Override
@@ -48,12 +50,20 @@ public class PatientServiceImpl implements IPatientService {
     }
 
     @Override
-    public void updatePatient(PatientDto patient) {
-        createPatient(patient);
+    public void updatePatient(PatientDto patient) throws ResourceNotFoundException {
+        Optional<Patient> found = patientRepository.findById(patient.getId());
+        if (found.isPresent())
+            createPatient(patient);
+        else
+            throw new ResourceNotFoundException("Patient Not Exist with id: "+patient.getId());
     }
 
     @Override
-    public void deletePatient(Long id) {
-        patientRepository.deleteById(id);
+    public void deletePatient(Long id) throws ResourceNotFoundException {
+        Optional<Patient> found = patientRepository.findById(id);
+        if (found.isPresent())
+            patientRepository.deleteById(id);
+        else
+            throw new ResourceNotFoundException("Patient Not Exist with id: "+id);
     }
 }
