@@ -5,7 +5,7 @@ import com.example.dentalOffice.service.OdontologistServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/odontologist")
@@ -15,7 +15,7 @@ public class OdontologistController {
     private OdontologistServiceImpl odontologistService;
 
     @GetMapping("/list")
-    public List<OdontologistDto> getAllOdontologist(){
+    public Set<OdontologistDto> getAllOdontologist(){
         return odontologistService.getAllOdontologist();
     }
 
@@ -34,7 +34,7 @@ public class OdontologistController {
         odontologistService.deleteOdontologist(id);
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     public void saveOdontologist(@RequestBody OdontologistDto o){
         odontologistService.saveOdontologist(o);
     }

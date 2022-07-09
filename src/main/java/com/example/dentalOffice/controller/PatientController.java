@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/patients")
@@ -17,7 +17,7 @@ public class PatientController {
     private PatientServiceImpl patientService;
 
     @GetMapping("/list")
-    public ResponseEntity<List<PatientDto>> getAllPatient(){
+    public ResponseEntity<Set<PatientDto>> getAllPatient(){
         return ResponseEntity.ok(patientService.getAllPatient());
     }
 
@@ -38,7 +38,7 @@ public class PatientController {
         return ResponseEntity.ok("Patient deleted");
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<?> savePatient(@RequestBody PatientDto patient){
         patientService.savePatient(patient);
         return ResponseEntity.ok(HttpStatus.OK);

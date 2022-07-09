@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/turns")
@@ -17,9 +17,8 @@ public class TurnController {
     @Autowired
     TurnServiceImpl turnService;
 
-
     @GetMapping("/list")
-    public ResponseEntity<List<TurnDto>> getAllTurn(){
+    public ResponseEntity<Set<TurnDto>> getAllTurn(){
         return ResponseEntity.ok(turnService.getAllTurn());
     }
 
@@ -40,10 +39,20 @@ public class TurnController {
         return ResponseEntity.ok("Turn deleted");
     }
 
-    @PostMapping("/")
+    @PostMapping("/register")
     public ResponseEntity<?> saveTurn(@RequestBody Turn turn){
         turnService.saveTurn(turn);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+//    @GetMapping("/patient/{id}")
+//    public ResponseEntity<Set<TurnDto>> getTurnByPatientId(@PathVariable Long id) throws Exception{
+//        return ResponseEntity.ok(turnService.getTurnByPatientId(id));
+//    }
+//
+//    @GetMapping("/Odontologist/{id}")
+//    public ResponseEntity<Set<TurnDto>> getTurnByOdontologistId(@PathVariable Long id) throws Exception{
+//        return ResponseEntity.ok(turnService.getTurnByOdontologistId(id));
+//    }
 
 }

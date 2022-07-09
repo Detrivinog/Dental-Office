@@ -7,9 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class OdontologistServiceImpl implements IOdontologistService {
@@ -35,9 +33,9 @@ public class OdontologistServiceImpl implements IOdontologistService {
     }
 
     @Override
-    public List<OdontologistDto> getAllOdontologist() {
+    public Set<OdontologistDto> getAllOdontologist() {
         List<Odontologist> allOdontologist = odontologistRepository.findAll();
-        List<OdontologistDto> allOdontologistDto = new ArrayList<OdontologistDto>();
+        Set<OdontologistDto> allOdontologistDto = new HashSet<>();
         for (Odontologist odontologist: allOdontologist)
             allOdontologistDto.add(mapper.convertValue(odontologist, OdontologistDto.class));
 
