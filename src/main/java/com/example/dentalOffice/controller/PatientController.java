@@ -1,6 +1,6 @@
 package com.example.dentalOffice.controller;
 
-import com.example.dentalOffice.entity.PatientDto;
+import com.example.dentalOffice.entity.dto.PatientDto;
 import com.example.dentalOffice.service.PatientServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

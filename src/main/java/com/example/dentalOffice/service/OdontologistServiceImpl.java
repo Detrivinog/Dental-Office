@@ -1,7 +1,7 @@
 package com.example.dentalOffice.service;
 
 import com.example.dentalOffice.entity.Odontologist;
-import com.example.dentalOffice.entity.OdontologistDto;
+import com.example.dentalOffice.entity.dto.OdontologistDto;
 import com.example.dentalOffice.repository.IOdontologistRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

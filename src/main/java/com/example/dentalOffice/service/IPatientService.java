@@ -1,6 +1,6 @@
 package com.example.dentalOffice.service;
 
-import com.example.dentalOffice.entity.PatientDto;
+import com.example.dentalOffice.entity.dto.PatientDto;
 
 import java.util.List;
 

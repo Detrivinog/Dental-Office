@@ -1,7 +1,7 @@
 package com.example.dentalOffice.service;
 
 import com.example.dentalOffice.entity.Turn;
-import com.example.dentalOffice.entity.TurnDto;
+import com.example.dentalOffice.entity.dto.TurnDto;
 
 import java.util.List;
 

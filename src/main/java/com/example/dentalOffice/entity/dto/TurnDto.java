@@ -1,5 +1,7 @@
-package com.example.dentalOffice.entity;
+package com.example.dentalOffice.entity.dto;
 
+import com.example.dentalOffice.entity.Odontologist;
+import com.example.dentalOffice.entity.Patient;
 import lombok.Data;
 
 import java.io.Serializable;

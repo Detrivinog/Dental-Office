@@ -1,7 +1,7 @@
 package com.example.dentalOffice.controller;
 
 import com.example.dentalOffice.entity.Turn;
-import com.example.dentalOffice.entity.TurnDto;
+import com.example.dentalOffice.entity.dto.TurnDto;
 import com.example.dentalOffice.service.TurnServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
