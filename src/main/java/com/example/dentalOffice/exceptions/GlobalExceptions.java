@@ -1,12 +1,10 @@
 package com.example.dentalOffice.exceptions;
 
 import org.apache.log4j.Logger;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
 public class GlobalExceptions {
@@ -26,7 +24,7 @@ public class GlobalExceptions {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> allError(Exception ex, WebRequest req) {
+    public ResponseEntity<?> allError(Exception ex) {
         logger.error(ex.getMessage());
         return new ResponseEntity("ExceptionHandler Error " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
