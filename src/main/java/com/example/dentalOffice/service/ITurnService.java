@@ -15,6 +15,6 @@ public interface ITurnService {
     void updateTurn(TurnDto turn) throws ResourceNotFoundException;
     void deleteTurn(Long id) throws ResourceNotFoundException;
 
-//    Set<TurnDto> getTurnByPatientId(Long id) throws Exception;
-//    Set<TurnDto> getTurnByOdontologistId(Long id) throws Exception;
+    Set<TurnDto> getTurnByPatientId(Long id) throws Exception;
+    Set<TurnDto> getTurnByOdontologistId(Long id) throws Exception;
 }

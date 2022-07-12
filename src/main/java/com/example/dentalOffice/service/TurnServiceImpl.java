@@ -83,23 +83,23 @@ public class TurnServiceImpl implements ITurnService{
             throw new ResourceNotFoundException("Turn Not Exist with id: "+id);
     }
 
-//    @Override
-//    public Set<TurnDto> getTurnByPatientId(Long id) throws Exception {
-//        Set<Turn> allTurn = turnRepository.getTurnByPatientId(id);
-//        Set<TurnDto> allTurnDto = new HashSet<>();
-//        for (Turn turn : allTurn)
-//            allTurnDto.add(mapper.convertValue(turn, TurnDto.class));
-//
-//        return allTurnDto;
-//    }
-//
-//    @Override
-//    public Set<TurnDto> getTurnByOdontologistId(Long id) throws Exception {
-//        Set<Turn> allTurn = turnRepository.getTurnByOdontologistId(id);
-//        Set<TurnDto> allTurnDto = new HashSet<>();
-//        for (Turn turn : allTurn)
-//            allTurnDto.add(mapper.convertValue(turn, TurnDto.class));
-//
-//        return allTurnDto;
-//    }
+    @Override
+    public Set<TurnDto> getTurnByPatientId(Long id) throws Exception {
+        Set<Turn> allTurn = turnRepository.getTurnByPatientId(id);
+        Set<TurnDto> allTurnDto = new HashSet<>();
+        for (Turn turn : allTurn)
+            allTurnDto.add(mapper.convertValue(turn, TurnDto.class));
+
+        return allTurnDto;
+    }
+
+    @Override
+    public Set<TurnDto> getTurnByOdontologistId(Long id) throws Exception {
+        Set<Turn> allTurn = turnRepository.getTurnByOdontologistId(id);
+        Set<TurnDto> allTurnDto = new HashSet<>();
+        for (Turn turn : allTurn)
+            allTurnDto.add(mapper.convertValue(turn, TurnDto.class));
+
+        return allTurnDto;
+    }
 }
