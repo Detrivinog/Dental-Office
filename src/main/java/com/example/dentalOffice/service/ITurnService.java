@@ -5,7 +5,6 @@ import com.example.dentalOffice.entity.dto.TurnDto;
 import com.example.dentalOffice.exceptions.BadRequestException;
 import com.example.dentalOffice.exceptions.ResourceNotFoundException;
 
-import java.util.List;
 import java.util.Set;
 
 public interface ITurnService {

@@ -1,7 +1,6 @@
 package com.example.dentalOffice.service;
 
-import com.example.dentalOffice.entity.Odontologist;
-import com.example.dentalOffice.entity.Patient;
+
 import com.example.dentalOffice.entity.Turn;
 import com.example.dentalOffice.entity.dto.OdontologistDto;
 import com.example.dentalOffice.entity.dto.PatientDto;
