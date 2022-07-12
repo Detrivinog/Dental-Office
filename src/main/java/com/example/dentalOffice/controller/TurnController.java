@@ -47,14 +47,14 @@ public class TurnController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
-//    @GetMapping("/patient/{id}")
-//    public ResponseEntity<Set<TurnDto>> getTurnByPatientId(@PathVariable Long id) throws Exception{
-//        return ResponseEntity.ok(turnService.getTurnByPatientId(id));
-//    }
-//
-//    @GetMapping("/Odontologist/{id}")
-//    public ResponseEntity<Set<TurnDto>> getTurnByOdontologistId(@PathVariable Long id) throws Exception{
-//        return ResponseEntity.ok(turnService.getTurnByOdontologistId(id));
-//    }
+    @GetMapping("/patient/{id}")
+    public ResponseEntity<Set<TurnDto>> getTurnByPatientId(@PathVariable Long id) throws Exception{
+        return ResponseEntity.ok(turnService.getTurnByPatientId(id));
+    }
+
+    @GetMapping("/Odontologist/{id}")
+    public ResponseEntity<Set<TurnDto>> getTurnByOdontologistId(@PathVariable Long id) throws Exception{
+        return ResponseEntity.ok(turnService.getTurnByOdontologistId(id));
+    }
 
 }

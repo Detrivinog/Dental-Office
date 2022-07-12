@@ -32,6 +32,14 @@ public class User implements UserDetails {
         this.rol = rol;
     }
 
+    public User(Long id, String name, String username, String password, Rol rol) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.rol = rol;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority grantedAuthority = new SimpleGrantedAuthority(rol.name());
